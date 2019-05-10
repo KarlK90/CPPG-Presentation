@@ -42,6 +42,22 @@ Bjarne Stroustrup
 
 ---
 
+<!-- _class: invert -->
+
+## Table of contents
+
+Common Sources of Errors and Maintainability Pitfalls
+Reasoning about a solution
+History of C++ Versions
+The Goals of the C++ Core Guidelines
+Short Overview of the Categories
+**Applied Examples**
+Tools
+Conclusion
+Q & A
+
+---
+
 <style scoped>
 section { text-align: left; }
 </style>
@@ -136,6 +152,8 @@ Bjarne Stroustrup
 </div>
 
 ---
+
+<!-- _class: invert -->
 
 ## But no radical solution is viable
 
@@ -706,7 +724,7 @@ std::string Taxi::getState() const noexcept
 
 # Conlusion
 
-* Writing safe and maintainable C++ is difficult
+* Writing safe, reliable and maintainable C++ is difficult
     * Practice
     * Care
     * Experience
