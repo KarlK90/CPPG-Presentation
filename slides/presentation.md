@@ -130,7 +130,7 @@ Erik Naggum
 </div>
 <div class="col-xs">
 
-* > I believe C++ instills fear in programmers, fear that the interaction of some details causes unpredictable results. Its unmanageable complexity has spawned more fear-preventing tools than any other language, but the solution should have been to create and use a language that does not overload the whole goddamn human brain with irrelevant details.
+* > I believe C++ instills fear in programmers, fear that the interaction of some details causes unpredictable results [...] but the solution should have been to create and use a language that does not overload the whole goddamn human brain with irrelevant details.
 
 </div>
 </div>
@@ -206,7 +206,7 @@ C: Classes and class hierarchies
 
 Enum: Enumerations
 
-R: Resource management
+**R: Resource management**
 
 ES: Expressions and statements
 
@@ -216,7 +216,7 @@ CP: Concurrency and parallelism
 
 E: Error handling
 
-Con: Constants and immutability
+**Con: Constants and immutability**
 
 CPL: C-style programming
 
