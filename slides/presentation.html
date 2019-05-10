@@ -1,0 +1,2052 @@
+<!DOCTYPE html><html lang="en-US"><head><title>C++ Core Guidelines</title><meta property="og:title" content="C++ Core Guidelines"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"><meta name="apple-mobile-web-app-capable" content="yes"><meta http-equiv="X-UA-Compatible" content="ie=edge"><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><style>@media screen{body,html{background:#000;height:100%;margin:0;overflow:hidden}[data-bespoke-marp-fragment=inactive]{visibility:hidden}.bespoke-marp-osc{display:none;opacity:0}.bespoke-marp-parent{bottom:0;left:0;position:absolute;right:0;top:0}.bespoke-marp-parent>.bespoke-marp-osc{background:rgba(0,0,0,.65);border-radius:7px;bottom:50px;color:#fff;display:block;font-family:Helvetica,Arial,sans-serif;font-size:16px;left:50%;line-height:0;opacity:1;padding:12px;position:absolute;touch-action:manipulation;-webkit-transform:translateX(-50%);transform:translateX(-50%);transition:opacity .2s linear;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap;z-index:1}.bespoke-marp-parent>.bespoke-marp-osc>*{margin-left:6px}.bespoke-marp-parent>.bespoke-marp-osc>:first-child{margin-left:0}.bespoke-marp-parent>.bespoke-marp-osc>span{opacity:.8}.bespoke-marp-parent>.bespoke-marp-osc>span[data-bespoke-marp-osc=page]{display:inline-block;min-width:140px;text-align:center}.bespoke-marp-parent>.bespoke-marp-osc>button{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:transparent;border:0;color:inherit;cursor:pointer;font-size:inherit;opacity:.8;outline:none;padding:0;transition:opacity .2s linear;-webkit-tap-highlight-color:transparent}.bespoke-marp-parent>.bespoke-marp-osc>button:disabled{cursor:not-allowed;opacity:.15!important}.bespoke-marp-parent>.bespoke-marp-osc>button:hover{opacity:1}.bespoke-marp-parent>.bespoke-marp-osc>button:hover:active{opacity:.6}.bespoke-marp-parent>.bespoke-marp-osc>button:hover:not(:disabled){transition:none}.bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=prev]{background:transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJNNjggOTBMMjggNTBsNDAtNDAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;height:32px;overflow:hidden;text-indent:100%;white-space:nowrap;width:32px}.bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=next]{background:transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI1IiBkPSJNMzIgOTBsNDAtNDAtNDAtNDAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;height:32px;overflow:hidden;text-indent:100%;white-space:nowrap;width:32px}.bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen]{background:transparent url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6NXB4fTwvc3R5bGU+PC9kZWZzPjxyZWN0IGNsYXNzPSJhIiB4PSIxMCIgeT0iMjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgcng9IjUuNjciLz48cGF0aCBjbGFzcz0iYSIgZD0iTTQwIDcwSDIwVjUwbTIwIDBMMjAgNzBtNDAtNDBoMjB2MjBtLTIwIDBsMjAtMjAiLz48L3N2Zz4=") no-repeat 50%;background-size:contain;height:32px;overflow:hidden;text-indent:100%;white-space:nowrap;width:32px}.bespoke-marp-parent>.bespoke-marp-osc>button[data-bespoke-marp-osc=fullscreen].exit{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2Utd2lkdGg6NXB4fTwvc3R5bGU+PC9kZWZzPjxyZWN0IGNsYXNzPSJhIiB4PSIxMCIgeT0iMjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2MCIgcng9IjUuNjciLz48cGF0aCBjbGFzcz0iYSIgZD0iTTIwIDUwaDIwdjIwbS0yMCAwbDIwLTIwbTQwIDBINjBWMzBtMjAgMEw2MCA1MCIvPjwvc3ZnPg==")}.bespoke-marp-parent.bespoke-marp-inactive{cursor:none}.bespoke-marp-parent.bespoke-marp-inactive>.bespoke-marp-osc{opacity:0;pointer-events:none}svg.bespoke-marp-slide{height:100%;left:0;pointer-events:none;position:absolute;top:0;width:100%;z-index:-1}svg.bespoke-marp-slide.bespoke-marp-active{pointer-events:auto;z-index:0}.bespoke-progress-parent{background:#222;display:flex;height:5px;width:100%}.bespoke-progress-parent+.bespoke-marp-parent{top:5px}.bespoke-progress-parent .bespoke-progress-bar{flex:0 0 0;background:#0288d1;transition:flex-basis .2s cubic-bezier(0,1,1,1)}}@media print{.bespoke-marp-osc,.bespoke-progress-parent{display:none!important;transition:none!important}.bespoke-marp-parent{top:0}}</style><style>article#presentation > svg > foreignObject > section {
+  width: 1280px;
+  height: 720px;
+
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+
+  scroll-snap-align: center center;
+}article#presentation > svg > foreignObject > section::after {
+  bottom: 0;
+  content: attr(data-marpit-pagination);
+  padding: inherit;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}article#presentation > svg > foreignObject > section:not([data-marpit-pagination])::after {
+  display: none;
+}/* Normalization */article#presentation > svg > foreignObject > section h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}@page {
+  size: 1280px 720px;
+  margin: 0;
+}@media print {html, body {
+  background-color: #fff;
+  margin: 0;
+  page-break-inside: avoid;
+  break-inside: avoid-page;
+}
+  article#presentation > svg > foreignObject > section {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  article#presentation > svg > foreignObject > section, article#presentation > svg > foreignObject > section * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  article#presentation > svg[data-marpit-svg] {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+  }
+}article#presentation > svg > foreignObject > section svg[data-marp-fitting=svg]{display:block;height:auto;width:100%}@supports (-ms-ime-align:auto){article#presentation > svg > foreignObject > section svg[data-marp-fitting=svg]{position:static}}article#presentation > svg > foreignObject > section svg[data-marp-fitting=svg].__reflow__{content:""}@supports (-ms-ime-align:auto){article#presentation > svg > foreignObject > section svg[data-marp-fitting=svg].__reflow__{position:relative}}article#presentation > svg > foreignObject > section [data-marp-fitting-svg-content]{display:table;white-space:nowrap}article#presentation > svg > foreignObject > section [data-marp-fitting-svg-content-wrap]{white-space:pre}article#presentation > svg > foreignObject > section img[data-marp-twemoji]{background:transparent;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em;width:1em}
+/*!
+ * CPP Theme forked from uncover
+ *
+ * @theme cpp
+ * @author Yuki Hattori
+ *
+ * @auto-scaling fittingHeader,math
+ */
+article#presentation > svg > foreignObject > section {
+  display: flex;
+  flex-direction: column;
+  font-family: "Public Sans", "Open Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  flex-wrap: nowrap;
+  font-size: 32px;
+  height: 720px;
+  justify-content: center;
+  letter-spacing: 2px;
+  line-height: 1.4;
+  padding: 30px 70px;
+  position: relative;
+  text-align: center;
+  width: 1280px;
+  z-index: 0;
+  background: #fdfcff;
+  color: #202228;
+}
+article#presentation > svg > foreignObject > section::after {
+  align-items: flex-end;
+  display: flex;
+  font-size: 0.6em;
+  height: 80px;
+  justify-content: flex-end;
+  padding: 30px;
+  text-align: right;
+  width: 80px;
+}
+article#presentation > svg > foreignObject > section::after {
+  /*
+   * Gradient with hard stops has incorrect rendering in Firefox's PDF.js
+   * @see https://github.com/mozilla/pdf.js/issues/10572
+   */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1 1" width="1" height="1"><path d="M0 1h1v-1Z" fill="rgba(32, 34, 40, 0.05)"/></svg>') no-repeat center center;
+  background-size: cover;
+  color: #202228;
+  text-shadow: 0 0 5px #fdfcff;
+}
+article#presentation > svg > foreignObject > section pre,
+article#presentation > svg > foreignObject > section code {
+  background: #f2f1f4;
+  color: #202228;
+}
+article#presentation > svg > foreignObject > section a {
+  color: #009dd5;
+}
+article#presentation > svg > foreignObject > section a:hover {
+  color: #087eaa;
+}
+article#presentation > svg > foreignObject > section h1 strong,
+article#presentation > svg > foreignObject > section h2 strong,
+article#presentation > svg > foreignObject > section h3 strong,
+article#presentation > svg > foreignObject > section h4 strong,
+article#presentation > svg > foreignObject > section h5 strong,
+article#presentation > svg > foreignObject > section h6 strong {
+  color: #33b1dd;
+}
+article#presentation > svg > foreignObject > section header,
+article#presentation > svg > foreignObject > section footer {
+  color: rgba(32, 34, 40, 0.4);
+  text-shadow: 0 1px 0 rgba(253, 252, 255, 0.8);
+}
+article#presentation > svg > foreignObject > section mark {
+  color: #009dd5;
+  background: transparent;
+}
+article#presentation > svg > foreignObject > section:not(.invert) {
+  /*
+
+  Atom One Light by Daniel Gamage
+  Original One Light Syntax theme from https://github.com/atom/one-light-syntax
+
+  base:    #fafafa
+  mono-1:  #383a42
+  mono-2:  #686b77
+  mono-3:  #a0a1a7
+  hue-1:   #0184bb
+  hue-2:   #4078f2
+  hue-3:   #a626a4
+  hue-4:   #50a14f
+  hue-5:   #e45649
+  hue-5-2: #c91243
+  hue-6:   #986801
+  hue-6-2: #c18401
+
+  */
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #383a42;
+  background: #fafafa;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-comment,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-quote {
+  color: #a0a1a7;
+  font-style: italic;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-doctag,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-keyword,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-formula {
+  color: #a626a4;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-section,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-name,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-selector-tag,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-deletion,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-subst {
+  color: #e45649;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-literal {
+  color: #0184bb;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-string,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-regexp,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-addition,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-attribute,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-meta-string {
+  color: #50a14f;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-built_in,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-class .hljs-title {
+  color: #c18401;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-attr,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-variable,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-template-variable,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-type,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-selector-class,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-selector-attr,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-selector-pseudo,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-number {
+  color: #986801;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-symbol,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-bullet,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-link,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-meta,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-selector-id,
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-title {
+  color: #4078f2;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-emphasis {
+  font-style: italic;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-strong {
+  font-weight: bold;
+}
+article#presentation > svg > foreignObject > section:not(.invert) .hljs-link {
+  text-decoration: underline;
+}
+article#presentation > svg > foreignObject > section.invert {
+  background: #202228;
+  color: #fff;
+  /*
+    codepen.io Embed Theme
+    Author: Justin Perry <http://github.com/ourmaninamsterdam>
+    Original theme - https://github.com/chriskempson/tomorrow-theme
+  */
+}
+article#presentation > svg > foreignObject > section.invert::after {
+  /*
+   * Gradient with hard stops has incorrect rendering in Firefox's PDF.js
+   * @see https://github.com/mozilla/pdf.js/issues/10572
+   */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1 1" width="1" height="1"><path d="M0 1h1v-1Z" fill="rgba(255, 255, 255, 0.05)"/></svg>') no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  text-shadow: 0 0 5px #202228;
+}
+article#presentation > svg > foreignObject > section.invert pre,
+article#presentation > svg > foreignObject > section.invert code {
+  background: #2b2d33;
+  color: #fff;
+}
+article#presentation > svg > foreignObject > section.invert a {
+  color: #60d0f0;
+}
+article#presentation > svg > foreignObject > section.invert a:hover {
+  color: #88dcf4;
+}
+article#presentation > svg > foreignObject > section.invert h1 strong,
+article#presentation > svg > foreignObject > section.invert h2 strong,
+article#presentation > svg > foreignObject > section.invert h3 strong,
+article#presentation > svg > foreignObject > section.invert h4 strong,
+article#presentation > svg > foreignObject > section.invert h5 strong,
+article#presentation > svg > foreignObject > section.invert h6 strong {
+  color: #80d9f3;
+}
+article#presentation > svg > foreignObject > section.invert header,
+article#presentation > svg > foreignObject > section.invert footer {
+  color: rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 0 rgba(32, 34, 40, 0.8);
+}
+article#presentation > svg > foreignObject > section.invert mark {
+  color: #60d0f0;
+  background: transparent;
+}
+article#presentation > svg > foreignObject > section.invert .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #222;
+  color: #fff;
+}
+article#presentation > svg > foreignObject > section.invert .hljs-comment,
+article#presentation > svg > foreignObject > section.invert .hljs-quote {
+  color: #777;
+}
+article#presentation > svg > foreignObject > section.invert .hljs-variable,
+article#presentation > svg > foreignObject > section.invert .hljs-template-variable,
+article#presentation > svg > foreignObject > section.invert .hljs-tag,
+article#presentation > svg > foreignObject > section.invert .hljs-regexp,
+article#presentation > svg > foreignObject > section.invert .hljs-meta,
+article#presentation > svg > foreignObject > section.invert .hljs-number,
+article#presentation > svg > foreignObject > section.invert .hljs-built_in,
+article#presentation > svg > foreignObject > section.invert .hljs-builtin-name,
+article#presentation > svg > foreignObject > section.invert .hljs-literal,
+article#presentation > svg > foreignObject > section.invert .hljs-params,
+article#presentation > svg > foreignObject > section.invert .hljs-symbol,
+article#presentation > svg > foreignObject > section.invert .hljs-bullet,
+article#presentation > svg > foreignObject > section.invert .hljs-link,
+article#presentation > svg > foreignObject > section.invert .hljs-deletion {
+  color: #ab875d;
+}
+article#presentation > svg > foreignObject > section.invert .hljs-section,
+article#presentation > svg > foreignObject > section.invert .hljs-title,
+article#presentation > svg > foreignObject > section.invert .hljs-name,
+article#presentation > svg > foreignObject > section.invert .hljs-selector-id,
+article#presentation > svg > foreignObject > section.invert .hljs-selector-class,
+article#presentation > svg > foreignObject > section.invert .hljs-type,
+article#presentation > svg > foreignObject > section.invert .hljs-attribute {
+  color: #9b869b;
+}
+article#presentation > svg > foreignObject > section.invert .hljs-string,
+article#presentation > svg > foreignObject > section.invert .hljs-keyword,
+article#presentation > svg > foreignObject > section.invert .hljs-selector-tag,
+article#presentation > svg > foreignObject > section.invert .hljs-addition {
+  color: #8f9c6c;
+}
+article#presentation > svg > foreignObject > section.invert .hljs-emphasis {
+  font-style: italic;
+}
+article#presentation > svg > foreignObject > section.invert .hljs-strong {
+  font-weight: bold;
+}
+article#presentation > svg > foreignObject > section > *:first-child, article#presentation > svg > foreignObject > section[data-header] > :nth-child(2) {
+  margin-top: 0;
+}
+article#presentation > svg > foreignObject > section > *:last-child, article#presentation > svg > foreignObject > section[data-footer] > :nth-last-child(2) {
+  margin-bottom: 0;
+}
+article#presentation > svg > foreignObject > section svg[data-marp-fitting=svg] {
+  max-height: 660px;
+  --preserve-aspect-ratio: xMidYMid meet;
+}
+article#presentation > svg > foreignObject > section p,
+article#presentation > svg > foreignObject > section blockquote {
+  margin: 0 0 15px 0;
+}
+article#presentation > svg > foreignObject > section h1,
+article#presentation > svg > foreignObject > section h2,
+article#presentation > svg > foreignObject > section h3,
+article#presentation > svg > foreignObject > section h4,
+article#presentation > svg > foreignObject > section h5,
+article#presentation > svg > foreignObject > section h6 {
+  margin: 15px 0 30px 0;
+}
+article#presentation > svg > foreignObject > section h1 strong,
+article#presentation > svg > foreignObject > section h2 strong,
+article#presentation > svg > foreignObject > section h3 strong,
+article#presentation > svg > foreignObject > section h4 strong,
+article#presentation > svg > foreignObject > section h5 strong,
+article#presentation > svg > foreignObject > section h6 strong {
+  font-weight: inherit;
+}
+article#presentation > svg > foreignObject > section h1 {
+  font-size: 2em;
+}
+article#presentation > svg > foreignObject > section h2 {
+  font-size: 1.7em;
+}
+article#presentation > svg > foreignObject > section h3 {
+  font-size: 1.4em;
+  letter-spacing: 2px;
+}
+article#presentation > svg > foreignObject > section h4 {
+  font-size: 1.2em;
+  letter-spacing: 2px;
+}
+article#presentation > svg > foreignObject > section h5 {
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+article#presentation > svg > foreignObject > section h6 {
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+article#presentation > svg > foreignObject > section header,
+article#presentation > svg > foreignObject > section footer {
+  position: absolute;
+  z-index: 1;
+  left: 70px;
+  right: 70px;
+  font-size: 0.45em;
+  letter-spacing: 1px;
+}
+article#presentation > svg > foreignObject > section header {
+  top: 30px;
+}
+article#presentation > svg > foreignObject > section footer {
+  bottom: 30px;
+}
+article#presentation > svg > foreignObject > section a {
+  text-decoration: none;
+}
+article#presentation > svg > foreignObject > section a:hover {
+  text-decoration: underline;
+}
+article#presentation > svg > foreignObject > section ul,
+article#presentation > svg > foreignObject > section ol {
+  margin: 0 auto;
+  text-align: left;
+  list-style: none;
+  padding-left: 0;
+}
+article#presentation > svg > foreignObject > section li {
+  padding-bottom: 4px;
+}
+article#presentation > svg > foreignObject > section li > ul, article#presentation > svg > foreignObject > section ol {
+  padding-left: 3rem;
+}
+article#presentation > svg > foreignObject > section > ul,
+article#presentation > svg > foreignObject > section > ol {
+  margin-bottom: 15px;
+}
+article#presentation > svg > foreignObject > section pre,
+article#presentation > svg > foreignObject > section code {
+  font-family: "Fira Code", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  letter-spacing: 0;
+  margin: -0.2em 0.2em 0.2em;
+  padding: 0.2em;
+}
+article#presentation > svg > foreignObject > section pre {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 70%;
+  line-height: 1.15;
+  margin: 15px auto 30px auto;
+  min-width: 40%;
+  padding: 0.4em 0.6em;
+  text-align: left;
+}
+article#presentation > svg > foreignObject > section pre > code {
+  margin: 0;
+  padding: 0;
+}
+article#presentation > svg > foreignObject > section table {
+  border-collapse: collapse;
+  margin: 0 auto 15px auto;
+}
+article#presentation > svg > foreignObject > section table > thead > tr > td,
+article#presentation > svg > foreignObject > section table > thead > tr > th,
+article#presentation > svg > foreignObject > section table > tbody > tr > td,
+article#presentation > svg > foreignObject > section table > tbody > tr > th {
+  padding: 0.15em 0.5em;
+}
+article#presentation > svg > foreignObject > section table > thead > tr > td,
+article#presentation > svg > foreignObject > section table > thead > tr > th {
+  border-bottom: 3px solid currentColor;
+}
+article#presentation > svg > foreignObject > section table > tbody > tr:not(:last-child) > td,
+article#presentation > svg > foreignObject > section table > tbody > tr:not(:last-child) > th {
+  border-bottom: 1px solid currentColor;
+}
+article#presentation > svg > foreignObject > section blockquote {
+  font-size: 90%;
+  line-height: 1.3;
+  padding: 0 2em;
+  position: relative;
+  z-index: 0;
+}
+article#presentation > svg > foreignObject > section blockquote::before, article#presentation > svg > foreignObject > section blockquote::after {
+  content: url("../assets/uncover-quote.svg");
+  height: auto;
+  pointer-events: none;
+  position: absolute;
+  width: 1em;
+  z-index: -1;
+}
+article#presentation > svg > foreignObject > section blockquote::before {
+  left: 0;
+  top: 0;
+}
+article#presentation > svg > foreignObject > section blockquote::after {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+article#presentation > svg > foreignObject > section blockquote > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Uncomment and set these variables to customize the grid. */
+article#presentation > svg > foreignObject > section .container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+article#presentation > svg > foreignObject > section .row {
+  box-sizing: border-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex: 0 1 auto;
+  -webkit-box-flex: 0;
+  flex: 0 1 auto;
+  -ms-flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -1rem;
+  margin-left: -1rem;
+}
+
+article#presentation > svg > foreignObject > section .row.reverse {
+  -ms-flex-direction: row-reverse;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  flex-direction: row-reverse;
+}
+
+article#presentation > svg > foreignObject > section .col.reverse {
+  -ms-flex-direction: column-reverse;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  flex-direction: column-reverse;
+}
+
+article#presentation > svg > foreignObject > section .col-xs,
+article#presentation > svg > foreignObject > section .col-xs-1,
+article#presentation > svg > foreignObject > section .col-xs-2,
+article#presentation > svg > foreignObject > section .col-xs-3,
+article#presentation > svg > foreignObject > section .col-xs-4,
+article#presentation > svg > foreignObject > section .col-xs-5,
+article#presentation > svg > foreignObject > section .col-xs-6,
+article#presentation > svg > foreignObject > section .col-xs-7,
+article#presentation > svg > foreignObject > section .col-xs-8,
+article#presentation > svg > foreignObject > section .col-xs-9,
+article#presentation > svg > foreignObject > section .col-xs-10,
+article#presentation > svg > foreignObject > section .col-xs-11,
+article#presentation > svg > foreignObject > section .col-xs-12 {
+  box-sizing: border-box;
+  -ms-flex: 0 0 auto;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+article#presentation > svg > foreignObject > section .col-xs {
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  max-width: 100%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-1 {
+  -ms-flex-preferred-size: 8.333%;
+  flex-basis: 8.333%;
+  max-width: 8.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-2 {
+  -ms-flex-preferred-size: 16.667%;
+  flex-basis: 16.667%;
+  max-width: 16.667%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-3 {
+  -ms-flex-preferred-size: 25%;
+  flex-basis: 25%;
+  max-width: 25%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-4 {
+  -ms-flex-preferred-size: 33.333%;
+  flex-basis: 33.333%;
+  max-width: 33.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-5 {
+  -ms-flex-preferred-size: 41.667%;
+  flex-basis: 41.667%;
+  max-width: 41.667%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-6 {
+  -ms-flex-preferred-size: 50%;
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-7 {
+  -ms-flex-preferred-size: 58.333%;
+  flex-basis: 58.333%;
+  max-width: 58.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-8 {
+  -ms-flex-preferred-size: 66.667%;
+  flex-basis: 66.667%;
+  max-width: 66.667%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-9 {
+  -ms-flex-preferred-size: 75%;
+  flex-basis: 75%;
+  max-width: 75%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-10 {
+  -ms-flex-preferred-size: 83.333%;
+  flex-basis: 83.333%;
+  max-width: 83.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-11 {
+  -ms-flex-preferred-size: 91.667%;
+  flex-basis: 91.667%;
+  max-width: 91.667%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-12 {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-1 {
+  margin-left: 8.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-2 {
+  margin-left: 16.667%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-3 {
+  margin-left: 25%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-4 {
+  margin-left: 33.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-5 {
+  margin-left: 41.667%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-6 {
+  margin-left: 50%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-7 {
+  margin-left: 58.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-8 {
+  margin-left: 66.667%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-9 {
+  margin-left: 75%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-10 {
+  margin-left: 83.333%;
+}
+
+article#presentation > svg > foreignObject > section .col-xs-offset-11 {
+  margin-left: 91.667%;
+}
+
+article#presentation > svg > foreignObject > section .start-xs {
+  -ms-flex-pack: start;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  text-align: start;
+}
+
+article#presentation > svg > foreignObject > section .center-xs {
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
+article#presentation > svg > foreignObject > section .end-xs {
+  -ms-flex-pack: end;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  text-align: end;
+}
+
+article#presentation > svg > foreignObject > section .top-xs {
+  -ms-flex-align: start;
+  -webkit-box-align: start;
+  align-items: flex-start;
+}
+
+article#presentation > svg > foreignObject > section .middle-xs {
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+article#presentation > svg > foreignObject > section .bottom-xs {
+  -ms-flex-align: end;
+  -webkit-box-align: end;
+  align-items: flex-end;
+}
+
+article#presentation > svg > foreignObject > section .around-xs {
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+article#presentation > svg > foreignObject > section .between-xs {
+  -ms-flex-pack: justify;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+article#presentation > svg > foreignObject > section .first-xs {
+  -ms-flex-order: -1;
+  -webkit-box-ordinal-group: 0;
+  order: -1;
+}
+
+article#presentation > svg > foreignObject > section .last-xs {
+  -ms-flex-order: 1;
+  -webkit-box-ordinal-group: 2;
+  order: 1;
+}
+
+@media only screen and (min-width: 48em) {
+  article#presentation > svg > foreignObject > section .container {
+    width: 46rem;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm,
+article#presentation > svg > foreignObject > section .col-sm-1,
+article#presentation > svg > foreignObject > section .col-sm-2,
+article#presentation > svg > foreignObject > section .col-sm-3,
+article#presentation > svg > foreignObject > section .col-sm-4,
+article#presentation > svg > foreignObject > section .col-sm-5,
+article#presentation > svg > foreignObject > section .col-sm-6,
+article#presentation > svg > foreignObject > section .col-sm-7,
+article#presentation > svg > foreignObject > section .col-sm-8,
+article#presentation > svg > foreignObject > section .col-sm-9,
+article#presentation > svg > foreignObject > section .col-sm-10,
+article#presentation > svg > foreignObject > section .col-sm-11,
+article#presentation > svg > foreignObject > section .col-sm-12 {
+    box-sizing: border-box;
+    -ms-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm {
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-1 {
+    -ms-flex-preferred-size: 8.333%;
+    flex-basis: 8.333%;
+    max-width: 8.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-2 {
+    -ms-flex-preferred-size: 16.667%;
+    flex-basis: 16.667%;
+    max-width: 16.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-3 {
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-4 {
+    -ms-flex-preferred-size: 33.333%;
+    flex-basis: 33.333%;
+    max-width: 33.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-5 {
+    -ms-flex-preferred-size: 41.667%;
+    flex-basis: 41.667%;
+    max-width: 41.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-7 {
+    -ms-flex-preferred-size: 58.333%;
+    flex-basis: 58.333%;
+    max-width: 58.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-8 {
+    -ms-flex-preferred-size: 66.667%;
+    flex-basis: 66.667%;
+    max-width: 66.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-9 {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-10 {
+    -ms-flex-preferred-size: 83.333%;
+    flex-basis: 83.333%;
+    max-width: 83.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-11 {
+    -ms-flex-preferred-size: 91.667%;
+    flex-basis: 91.667%;
+    max-width: 91.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-12 {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-1 {
+    margin-left: 8.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-2 {
+    margin-left: 16.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-3 {
+    margin-left: 25%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-4 {
+    margin-left: 33.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-5 {
+    margin-left: 41.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-6 {
+    margin-left: 50%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-7 {
+    margin-left: 58.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-8 {
+    margin-left: 66.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-9 {
+    margin-left: 75%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-10 {
+    margin-left: 83.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-sm-offset-11 {
+    margin-left: 91.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .start-sm {
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  article#presentation > svg > foreignObject > section .center-sm {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  article#presentation > svg > foreignObject > section .end-sm {
+    -ms-flex-pack: end;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    text-align: end;
+  }
+
+  article#presentation > svg > foreignObject > section .top-sm {
+    -ms-flex-align: start;
+    -webkit-box-align: start;
+    align-items: flex-start;
+  }
+
+  article#presentation > svg > foreignObject > section .middle-sm {
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+
+  article#presentation > svg > foreignObject > section .bottom-sm {
+    -ms-flex-align: end;
+    -webkit-box-align: end;
+    align-items: flex-end;
+  }
+
+  article#presentation > svg > foreignObject > section .around-sm {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
+
+  article#presentation > svg > foreignObject > section .between-sm {
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+
+  article#presentation > svg > foreignObject > section .first-sm {
+    -ms-flex-order: -1;
+    -webkit-box-ordinal-group: 0;
+    order: -1;
+  }
+
+  article#presentation > svg > foreignObject > section .last-sm {
+    -ms-flex-order: 1;
+    -webkit-box-ordinal-group: 2;
+    order: 1;
+  }
+}
+@media only screen and (min-width: 62em) {
+  article#presentation > svg > foreignObject > section .container {
+    width: 61rem;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md,
+article#presentation > svg > foreignObject > section .col-md-1,
+article#presentation > svg > foreignObject > section .col-md-2,
+article#presentation > svg > foreignObject > section .col-md-3,
+article#presentation > svg > foreignObject > section .col-md-4,
+article#presentation > svg > foreignObject > section .col-md-5,
+article#presentation > svg > foreignObject > section .col-md-6,
+article#presentation > svg > foreignObject > section .col-md-7,
+article#presentation > svg > foreignObject > section .col-md-8,
+article#presentation > svg > foreignObject > section .col-md-9,
+article#presentation > svg > foreignObject > section .col-md-10,
+article#presentation > svg > foreignObject > section .col-md-11,
+article#presentation > svg > foreignObject > section .col-md-12 {
+    box-sizing: border-box;
+    -ms-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md {
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-1 {
+    -ms-flex-preferred-size: 8.333%;
+    flex-basis: 8.333%;
+    max-width: 8.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-2 {
+    -ms-flex-preferred-size: 16.667%;
+    flex-basis: 16.667%;
+    max-width: 16.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-3 {
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-4 {
+    -ms-flex-preferred-size: 33.333%;
+    flex-basis: 33.333%;
+    max-width: 33.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-5 {
+    -ms-flex-preferred-size: 41.667%;
+    flex-basis: 41.667%;
+    max-width: 41.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-7 {
+    -ms-flex-preferred-size: 58.333%;
+    flex-basis: 58.333%;
+    max-width: 58.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-8 {
+    -ms-flex-preferred-size: 66.667%;
+    flex-basis: 66.667%;
+    max-width: 66.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-9 {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-10 {
+    -ms-flex-preferred-size: 83.333%;
+    flex-basis: 83.333%;
+    max-width: 83.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-11 {
+    -ms-flex-preferred-size: 91.667%;
+    flex-basis: 91.667%;
+    max-width: 91.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-12 {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-1 {
+    margin-left: 8.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-2 {
+    margin-left: 16.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-3 {
+    margin-left: 25%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-4 {
+    margin-left: 33.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-5 {
+    margin-left: 41.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-6 {
+    margin-left: 50%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-7 {
+    margin-left: 58.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-8 {
+    margin-left: 66.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-9 {
+    margin-left: 75%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-10 {
+    margin-left: 83.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-md-offset-11 {
+    margin-left: 91.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .start-md {
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  article#presentation > svg > foreignObject > section .center-md {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  article#presentation > svg > foreignObject > section .end-md {
+    -ms-flex-pack: end;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    text-align: end;
+  }
+
+  article#presentation > svg > foreignObject > section .top-md {
+    -ms-flex-align: start;
+    -webkit-box-align: start;
+    align-items: flex-start;
+  }
+
+  article#presentation > svg > foreignObject > section .middle-md {
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+
+  article#presentation > svg > foreignObject > section .bottom-md {
+    -ms-flex-align: end;
+    -webkit-box-align: end;
+    align-items: flex-end;
+  }
+
+  article#presentation > svg > foreignObject > section .around-md {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
+
+  article#presentation > svg > foreignObject > section .between-md {
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+
+  article#presentation > svg > foreignObject > section .first-md {
+    -ms-flex-order: -1;
+    -webkit-box-ordinal-group: 0;
+    order: -1;
+  }
+
+  article#presentation > svg > foreignObject > section .last-md {
+    -ms-flex-order: 1;
+    -webkit-box-ordinal-group: 2;
+    order: 1;
+  }
+}
+@media only screen and (min-width: 75em) {
+  article#presentation > svg > foreignObject > section .container {
+    width: 71rem;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg,
+article#presentation > svg > foreignObject > section .col-lg-1,
+article#presentation > svg > foreignObject > section .col-lg-2,
+article#presentation > svg > foreignObject > section .col-lg-3,
+article#presentation > svg > foreignObject > section .col-lg-4,
+article#presentation > svg > foreignObject > section .col-lg-5,
+article#presentation > svg > foreignObject > section .col-lg-6,
+article#presentation > svg > foreignObject > section .col-lg-7,
+article#presentation > svg > foreignObject > section .col-lg-8,
+article#presentation > svg > foreignObject > section .col-lg-9,
+article#presentation > svg > foreignObject > section .col-lg-10,
+article#presentation > svg > foreignObject > section .col-lg-11,
+article#presentation > svg > foreignObject > section .col-lg-12 {
+    box-sizing: border-box;
+    -ms-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg {
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-1 {
+    -ms-flex-preferred-size: 8.333%;
+    flex-basis: 8.333%;
+    max-width: 8.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-2 {
+    -ms-flex-preferred-size: 16.667%;
+    flex-basis: 16.667%;
+    max-width: 16.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-3 {
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-4 {
+    -ms-flex-preferred-size: 33.333%;
+    flex-basis: 33.333%;
+    max-width: 33.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-5 {
+    -ms-flex-preferred-size: 41.667%;
+    flex-basis: 41.667%;
+    max-width: 41.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-7 {
+    -ms-flex-preferred-size: 58.333%;
+    flex-basis: 58.333%;
+    max-width: 58.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-8 {
+    -ms-flex-preferred-size: 66.667%;
+    flex-basis: 66.667%;
+    max-width: 66.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-9 {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-10 {
+    -ms-flex-preferred-size: 83.333%;
+    flex-basis: 83.333%;
+    max-width: 83.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-11 {
+    -ms-flex-preferred-size: 91.667%;
+    flex-basis: 91.667%;
+    max-width: 91.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-12 {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-1 {
+    margin-left: 8.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-2 {
+    margin-left: 16.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-3 {
+    margin-left: 25%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-4 {
+    margin-left: 33.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-5 {
+    margin-left: 41.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-6 {
+    margin-left: 50%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-7 {
+    margin-left: 58.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-8 {
+    margin-left: 66.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-9 {
+    margin-left: 75%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-10 {
+    margin-left: 83.333%;
+  }
+
+  article#presentation > svg > foreignObject > section .col-lg-offset-11 {
+    margin-left: 91.667%;
+  }
+
+  article#presentation > svg > foreignObject > section .start-lg {
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    text-align: start;
+  }
+
+  article#presentation > svg > foreignObject > section .center-lg {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  article#presentation > svg > foreignObject > section .end-lg {
+    -ms-flex-pack: end;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    text-align: end;
+  }
+
+  article#presentation > svg > foreignObject > section .top-lg {
+    -ms-flex-align: start;
+    -webkit-box-align: start;
+    align-items: flex-start;
+  }
+
+  article#presentation > svg > foreignObject > section .middle-lg {
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+
+  article#presentation > svg > foreignObject > section .bottom-lg {
+    -ms-flex-align: end;
+    -webkit-box-align: end;
+    align-items: flex-end;
+  }
+
+  article#presentation > svg > foreignObject > section .around-lg {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+  }
+
+  article#presentation > svg > foreignObject > section .between-lg {
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+
+  article#presentation > svg > foreignObject > section .first-lg {
+    -ms-flex-order: -1;
+    -webkit-box-ordinal-group: 0;
+    order: -1;
+  }
+
+  article#presentation > svg > foreignObject > section .last-lg {
+    -ms-flex-order: 1;
+    -webkit-box-ordinal-group: 2;
+    order: 1;
+  }
+}
+article#presentation > svg > foreignObject > section[data-marpit-scope-LrNpEUDR] { text-align: left; }
+article#presentation > svg > foreignObject > section[data-marpit-scope-PKPQF2WZ] p {
+flex-basis: 50%;
+max-width: 50%;
+text-align: left;
+}
+article#presentation > svg > foreignObject > section[data-marpit-scope-BsZQUYHK] li { text-align: center; }
+article#presentation > svg > foreignObject > section[data-marpit-scope-vK5Xex3a] p { text-align: left; }
+article#presentation > svg > foreignObject > section[data-marpit-scope-kwVL1GBh] p { text-align: left; }
+article#presentation > svg > foreignObject > section[data-marpit-scope-IiCuRHR2] .emoji{
+    width: 300px;
+    height: 300px;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"] {
+  padding: 0 !important;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"]::before,
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"]::after,
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="content"]::before,
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="content"]::after {
+  display: none !important;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] {
+  all: initial;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container][data-marpit-advanced-background-direction="vertical"] {
+  flex-direction: column;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split] > div[data-marpit-advanced-background-container] {
+  width: 50%;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split="right"] > div[data-marpit-advanced-background-container] {
+  margin-left: 50%;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] > figure {
+  all: initial;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: auto;
+  margin: 0;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="content"],
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="pseudo"] {
+  background: transparent !important;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background="pseudo"],
+article#presentation > svg[data-marpit-svg] > foreignObject[data-marpit-advanced-background="pseudo"] {
+  pointer-events: none !important;
+}
+article#presentation > svg > foreignObject > section[data-marpit-advanced-background-split] {
+  width: 100%;
+  height: 100%;
+}
+</style></head><body><div class="bespoke-progress-parent"><div class="bespoke-progress-bar"></div></div><div class="bespoke-marp-osc"><button data-bespoke-marp-osc="prev" tabindex="-1" title="Previous slide">Previous slide</button><span data-bespoke-marp-osc="page"></span><button data-bespoke-marp-osc="next" tabindex="-1" title="Next slide">Next slide</button><button data-bespoke-marp-osc="fullscreen" tabindex="-1" title="Toggle fullscreen (f)">Toggle fullscreen</button></div><article id="presentation"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="1" data-class="lead" data-theme="cpp" class="lead" style="--class:lead;--theme:cpp;"><div class="row center-xs middle-xs around-xs">
+<div class="col-xs">
+<p><img src="cpp_core_guidelines_logo.svg" alt="width:300px" style="width:300px;" /></p>
+</div>
+<div class="col-xs-8">
+<h1>Core Guidelines</h1>
+<p><em>use modern C++ effectively</em></p>
+</div>
+</div>
+Stefan Kerkmann
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-marpit-fragments="1" data-paginate="true" data-theme="cpp" data-marpit-pagination="2" style="--paginate:true;--theme:cpp;">
+<div class="row middle-xs">
+<div class="col-xs">
+<p><img src="bjarne.jpg" alt="width:300px" style="width:300px;" /></p>
+<p>Bjarne Stroustrup</p>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">
+<blockquote>
+<p>In C++ it's harder to shoot yourself in the foot, but when you do, you blow off your whole leg.</p>
+</blockquote>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="3" style="--paginate:true;--class:invert;--theme:cpp;">
+<h2>Table of contents</h2>
+<p>Common Sources of Errors and Maintainability Pitfalls<br />
+Reasoning about a solution<br />
+History of C++ Versions<br />
+The Goals of the C++ Core Guidelines<br />
+Short Overview of the Categories<br />
+<strong>Applied Examples</strong><br />
+Tools<br />
+Conclusion<br />
+Q &amp; A</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-marpit-scope-LrNpEUDR="" data-paginate="true" data-theme="cpp" data-marpit-pagination="4" style="--paginate:true;--theme:cpp;"><div class="row">
+<div class="col-xs">
+<h2>Errors</h2>
+<ul>
+<li>Memory Management
+<ul>
+<li>Resource leaks</li>
+<li>Use-after free</li>
+<li>Double free</li>
+</ul>
+</li>
+<li>Concurrency
+<ul>
+<li>Data races</li>
+<li>Deadlocks</li>
+</ul>
+</li>
+<li>Mutability</li>
+<li>Uninitialized Variables</li>
+</ul>
+</div>
+<div class="col-xs">
+<h2>Maintainability</h2>
+<ul>
+<li>Weak Typing</li>
+<li>Code Noise</li>
+<li>Code Reuse</li>
+<li>Referential Transparency</li>
+<li>10² Language Features</li>
+<li>10³ Ways to solve a problem<br />
+<br /></li>
+</ul>
+<h4>to be continued...</h4>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" data-theme="cpp" data-marpit-pagination="5" style="--paginate:true;--theme:cpp;">
+<h2>C++ History and Standards</h2>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>C++ Standard</th>
+<th>Informal name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1979</td>
+<td>None</td>
+<td>C with Classes</td>
+</tr>
+<tr>
+<td>1983</td>
+<td><em>CFront 1.0</em></td>
+<td>C++ 1.0</td>
+</tr>
+<tr>
+<td>1989</td>
+<td><em>CFront 2.0</em></td>
+<td>C++ 2.0</td>
+</tr>
+<tr>
+<td>1998</td>
+<td>ISO/IEC 14882:1998[23]</td>
+<td>C++98</td>
+</tr>
+<tr>
+<td>2003</td>
+<td>ISO/IEC 14882:2003[24]</td>
+<td>C++03</td>
+</tr>
+<tr>
+<td>2011</td>
+<td>ISO/IEC 14882:2011[25]</td>
+<td>C++11, C++0x</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>ISO/IEC 14882:2014[26]</td>
+<td>C++14, C++1y</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>ISO/IEC 14882:2017[9]</td>
+<td>C++17, C++1z</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>to be determined</td>
+<td>C++20[17], C++2a</td>
+</tr>
+</tbody>
+</table>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="6" style="--paginate:true;--class:invert;--theme:cpp;">
+<h2>Looking for a solution to a preventable problem</h2>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-marpit-fragments="1" data-paginate="true" data-theme="cpp" data-marpit-pagination="7" style="--paginate:true;--theme:cpp;">
+<div class="row middle-xs">
+<div class="col-xs">
+<p><img src="naggum_denoise.jpg" alt="width:300px" style="width:300px;" /></p>
+<p>Erik Naggum</p>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">
+<blockquote>
+<p>I believe C++ instills fear in programmers, fear that the interaction of some details causes unpredictable results. Its unmanageable complexity has spawned more fear-preventing tools than any other language, but the solution should have been to create and use a language that does not overload the whole goddamn human brain with irrelevant details.</p>
+</blockquote>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-marpit-fragments="1" data-paginate="true" data-theme="cpp" data-marpit-pagination="8" style="--paginate:true;--theme:cpp;">
+<div class="row middle-xs">
+<div class="col-xs">
+<p><img src="./bjarne.jpg" alt="width:300px" style="width:300px;" /></p>
+<p>Bjarne Stroustrup</p>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">
+<blockquote>
+<p>Within C++, there is a much smaller and cleaner language struggling to get out.</p>
+</blockquote>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-marpit-fragments="3" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="9" style="--paginate:true;--class:invert;--theme:cpp;">
+<h2>But no radical solution is viable</h2>
+<ul>
+<li data-marpit-fragment="1">Sheer amount of code bases written since 1983</li>
+<li data-marpit-fragment="2">Keeping Backwards compatibility</li>
+<li data-marpit-fragment="3">Reshaping the whole language is not an option</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-marpit-fragments="9" data-paginate="true" data-theme="cpp" data-marpit-pagination="10" style="--paginate:true;--theme:cpp;">
+<h2>C++ Core Guidelines - Goals</h2>
+<ul>
+<li data-marpit-fragment="1">Use modern C++ features</li>
+<li data-marpit-fragment="2">Produce code that is
+<ul>
+<li data-marpit-fragment="3">Type safe <img class="emoji" draggable="false" alt="🧷" src="https://twemoji.maxcdn.com/2/svg/1f9f7.svg" data-marp-twemoji=""/></li>
+<li data-marpit-fragment="4">Exhibits no resource leaks <img class="emoji" draggable="false" alt="☔" src="https://twemoji.maxcdn.com/2/svg/2614.svg" data-marp-twemoji=""/></li>
+<li data-marpit-fragment="5">Catches common logic errors <img class="emoji" draggable="false" alt="👮" src="https://twemoji.maxcdn.com/2/svg/1f46e.svg" data-marp-twemoji=""/></li>
+<li data-marpit-fragment="6">Runs fast! <img class="emoji" draggable="false" alt="🏃" src="https://twemoji.maxcdn.com/2/svg/1f3c3.svg" data-marp-twemoji=""/>‍</li>
+<li data-marpit-fragment="7">Emphasizes simplicity and safety <img class="emoji" draggable="false" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" data-marp-twemoji=""/></li>
+</ul>
+</li>
+<li data-marpit-fragment="8">Suitable for gradual introduction into existing code bases</li>
+<li data-marpit-fragment="9">Be enforceable by machines <img class="emoji" draggable="false" alt="🤖" src="https://twemoji.maxcdn.com/2/svg/1f916.svg" data-marp-twemoji=""/></li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-marpit-scope-PKPQF2WZ="" data-paginate="true" data-theme="cpp" data-marpit-pagination="11" style="--paginate:true;--theme:cpp;">
+<h2>Overview</h2>
+<div class="row between-xs">
+<p>I: Interfaces</p>
+<p>F: Functions</p>
+<p>C: Classes and class hierarchies</p>
+<p>Enum: Enumerations</p>
+<p>R: Resource management</p>
+<p>ES: Expressions and statements</p>
+<p>Per: Performance</p>
+<p>CP: Concurrency and parallelism</p>
+<p>E: Error handling</p>
+<p>Con: Constants and immutability</p>
+<p>CPL: C-style programming</p>
+<p>SF: Source files</p>
+<p>SL: The Standard Library</p>
+<p>T: Templates and generic programming</p>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-marpit-scope-BsZQUYHK="" data-marpit-fragments="2" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="12" style="--paginate:true;--class:invert;--theme:cpp;">
+<h1>Showtime <img class="emoji" draggable="false" alt="🥳" src="https://twemoji.maxcdn.com/2/svg/1f973.svg" data-marp-twemoji=""/></h1>
+<ul>
+<li data-marpit-fragment="1">
+<h3>Con: Constants and immutability</h3>
+</li>
+<li data-marpit-fragment="2">
+<h3>R: Resource management</h3>
+</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-marpit-scope-vK5Xex3a="" data-paginate="true" data-theme="cpp" data-marpit-pagination="13" style="--paginate:true;--theme:cpp;">
+<h1>Con: Constants and immutability</h1>
+
+<p>Con.1: By default, make objects immutable</p>
+<p>Con.2: By default, make member functions <code>const</code></p>
+<p>Con.3: By default, pass pointers and references to <code>const</code>s</p>
+<p>Con.4: Use <code>const</code> to define objects with values that do not change after construction</p>
+<p>Con.5: Use <code>constexpr</code> for values that can be computed at compile time</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-marpit-fragments="3" data-paginate="true" data-theme="cpp" data-marpit-pagination="14" style="--paginate:true;--theme:cpp;">
+<h2>Bad <img class="emoji" draggable="false" alt="💩" src="https://twemoji.maxcdn.com/2/svg/1f4a9.svg" data-marp-twemoji=""/></h2>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span>
+<span class="hljs-title">Person</span> {</span>
+    <span class="hljs-function">DivineEternity
+    <span class="hljs-title">LastJudgement</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;Person*&gt; family)</span>
+    </span>{
+        <span class="hljs-comment">// Here be dragons</span>
+    }
+};
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Pass by value</li>
+<li data-marpit-fragment="2">Mutation of me or my family? <img class="emoji" draggable="false" alt="🧟" src="https://twemoji.maxcdn.com/2/svg/1f9df.svg" data-marp-twemoji=""/>‍</li>
+<li data-marpit-fragment="3">Might throw a <code>GoToHellException</code> <img class="emoji" draggable="false" alt="🔥" src="https://twemoji.maxcdn.com/2/svg/1f525.svg" data-marp-twemoji=""/></li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-marpit-fragments="3" data-paginate="true" data-theme="cpp" data-marpit-pagination="15" style="--paginate:true;--theme:cpp;">
+<h2>Better</h2>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span>
+<span class="hljs-title">Person</span> {</span>
+    <span class="hljs-function">DivineEternity
+    <span class="hljs-title">LastJudgement</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">const</span> Person*&gt;&amp; family)</span>
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span>
+    </span>{
+        <span class="hljs-comment">// Here be dragons</span>
+    }
+};
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Easier to reason about</li>
+<li data-marpit-fragment="2">A lot of code noise</li>
+<li data-marpit-fragment="3">Opt-in rather than Opt-out</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-marpit-scope-kwVL1GBh="" data-paginate="true" data-theme="cpp" data-marpit-pagination="16" style="--paginate:true;--theme:cpp;">
+<h1>R: Resource management</h1>
+<p>R.1 Manage resources automatically using resource handles and RAII</p>
+<p>R.20 Use <code>unique_ptr</code> or <code>shared_ptr</code> to represent ownership</p>
+<p>R.11 Avoid calling <code>new</code> and <code>delete</code> explicitly</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="17" style="--paginate:true;--class:invert;--theme:cpp;">
+<h1>R.1 Manage resources automatically using resource handles and RAII</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-marpit-fragments="3" data-paginate="true" data-theme="cpp" data-marpit-pagination="18" style="--paginate:true;--theme:cpp;">
+<h2>Bad <img class="emoji" draggable="false" alt="💩" src="https://twemoji.maxcdn.com/2/svg/1f4a9.svg" data-marp-twemoji=""/></h2>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span>
+</span>{
+    File* d_fP = fopen(<span class="hljs-string">"/etc/passwd"</span>, <span class="hljs-string">"r"</span>);
+    <span class="hljs-keyword">if</span>(d_fp == <span class="hljs-literal">nullptr</span>){
+        <span class="hljs-comment">// do error things</span>
+    }
+
+    <span class="hljs-keyword">char</span> line[<span class="hljs-number">512</span>];
+    <span class="hljs-keyword">while</span>(fgets(line, <span class="hljs-keyword">sizeof</span>(line), d_fp)) {
+        <span class="hljs-comment">// do things with line</span>
+    }
+
+    <span class="hljs-comment">// {...} more code - maybe with early returns</span>
+    <span class="hljs-comment">// exceptions, threads...</span>
+
+    <span class="hljs-keyword">if</span>(d_fp != <span class="hljs-literal">nullptr</span>){
+        fclose(d_fp);
+    }
+}
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Did we cover all cases and closed the file handle?</li>
+<li data-marpit-fragment="2">What about exceptions thrown in called procedures?</li>
+<li data-marpit-fragment="3">We will have a ressource leak <img class="emoji" draggable="false" alt="💦" src="https://twemoji.maxcdn.com/2/svg/1f4a6.svg" data-marp-twemoji=""/></li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-marpit-fragments="3" data-paginate="true" data-theme="cpp" data-marpit-pagination="19" style="--paginate:true;--theme:cpp;">
+<h2>Use RAII</h2>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SmartFP</span>
+{</span>
+    SmartFP(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* fname, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* mode)
+    {
+        d_fp = fopen(fname, mode);
+    }
+    ~SmartFP()
+    {
+        <span class="hljs-keyword">if</span>(d_fp != <span class="hljs-literal">nullptr</span>) {
+            fclose(d_fp);
+        }
+    }
+    FILE* d_fp;
+};
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Aquire or allocate resource handle in constructor</li>
+<li data-marpit-fragment="2">Release resource handle in destructor</li>
+<li data-marpit-fragment="3">Lifetime of handle is bound to lifetime of the owning object <img class="emoji" draggable="false" alt="⏰" src="https://twemoji.maxcdn.com/2/svg/23f0.svg" data-marp-twemoji=""/></li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-marpit-fragments="3" data-paginate="true" data-theme="cpp" data-marpit-pagination="20" style="--paginate:true;--theme:cpp;">
+<h2>Better</h2>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{
+    SmartFP fp {<span class="hljs-string">"/etc/passwd"</span>, <span class="hljs-string">"r"</span>};
+    <span class="hljs-keyword">if</span>(fp.d_fp == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-comment">// do error things</span>
+    }
+
+    <span class="hljs-keyword">char</span> line[<span class="hljs-number">512</span>];
+    <span class="hljs-keyword">while</span>(fgets(line, <span class="hljs-keyword">sizeof</span>(line), fp.d_fp)) {
+        <span class="hljs-comment">// do things with line</span>
+    }
+
+    <span class="hljs-comment">// {...} more code - maybe with early returns</span>
+    <span class="hljs-comment">// exceptions, threads...</span>
+
+    <span class="hljs-comment">// note, no fclose</span>
+    }
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1"><img class="emoji" draggable="false" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" data-marp-twemoji=""/> The FILE pointer will never leak due to destruction.</li>
+<li data-marpit-fragment="2"><img class="emoji" draggable="false" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" data-marp-twemoji=""/> Closing is deterministic and in a single place</li>
+<li data-marpit-fragment="3"><img class="emoji" draggable="false" alt="💥" src="https://twemoji.maxcdn.com/2/svg/1f4a5.svg" data-marp-twemoji=""/> Vurnerable to &quot;use after free&quot; errors</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="21" style="--paginate:true;--class:invert;--theme:cpp;">
+<h3>R.20: Use <code>unique_ptr</code> or <code>shared_ptr</code> to represent ownership</h3>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-marpit-fragments="7" data-paginate="true" data-theme="cpp" data-marpit-pagination="22" style="--paginate:true;--theme:cpp;">
+<h3>Good <code>std::unique_ptr</code></h3>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">unique_ptr</span>&lt;FILE, <span class="hljs-keyword">int</span> (*)(FILE*)&gt; fp_uni(
+        fopen(<span class="hljs-string">"/etc/passwd"</span>, <span class="hljs-string">"r"</span>),
+        fclose
+    );
+
+    <span class="hljs-keyword">if</span>(fp == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-comment">// do error things</span>
+    }
+
+    <span class="hljs-keyword">char</span> line[<span class="hljs-number">512</span>];
+    <span class="hljs-keyword">while</span>(fgets(line, <span class="hljs-keyword">sizeof</span>(line), fp)) {
+        <span class="hljs-comment">// do things with line</span>
+    }
+
+    <span class="hljs-comment">// {...} more code - maybe with early returns</span>
+    <span class="hljs-comment">// exceptions, threads...</span>
+
+    <span class="hljs-comment">// note, no fclose</span>
+    }
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Single owner</li>
+<li data-marpit-fragment="2">Copying is prohibited</li>
+<li data-marpit-fragment="3">Can be moved</li>
+<li data-marpit-fragment="4">Same size as raw pointer</li>
+<li data-marpit-fragment="5">Automatically destroyed when out of scope</li>
+<li data-marpit-fragment="6">Acts like a normal pointer</li>
+<li data-marpit-fragment="7">
+<h1><img class="emoji" draggable="false" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" data-marp-twemoji=""/></h1>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-marpit-fragments="6" data-paginate="true" data-theme="cpp" data-marpit-pagination="23" style="--paginate:true;--theme:cpp;">
+<h3>Good <code>std::shared_ptr</code></h3>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">shared_ptr</span>&lt;FILE&gt; fp(
+        fopen(<span class="hljs-string">"/etc/passwd"</span>, <span class="hljs-string">"r"</span>),
+        fclose
+    );
+
+    <span class="hljs-keyword">if</span>(fp == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-comment">// do error things</span>
+    }
+
+    <span class="hljs-keyword">char</span> line[<span class="hljs-number">512</span>];
+    <span class="hljs-keyword">while</span>(fgets(line, <span class="hljs-keyword">sizeof</span>(line), fp)) {
+        <span class="hljs-comment">// do things with line</span>
+    }
+
+    <span class="hljs-comment">// {...} more code - maybe with early returns</span>
+    <span class="hljs-comment">// exceptions, threads...</span>
+
+    <span class="hljs-comment">// note, no fclose</span>
+    }
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Multiple owners</li>
+<li data-marpit-fragment="2">Copying and moving is allowed</li>
+<li data-marpit-fragment="3">Keeps internal reference count to track usage</li>
+<li data-marpit-fragment="4">Size for counter, deleter and pointer</li>
+<li data-marpit-fragment="5">Acts like a normal pointer</li>
+<li data-marpit-fragment="6">
+<h1><img class="emoji" draggable="false" alt="👍" src="https://twemoji.maxcdn.com/2/svg/1f44d.svg" data-marp-twemoji=""/></h1>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="24" style="--paginate:true;--class:invert;--theme:cpp;">
+<h3>R.11 Avoid calling <code>new</code> and <code>delete</code> explicitly</h3>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-marpit-fragments="2" data-paginate="true" data-theme="cpp" data-marpit-pagination="25" style="--paginate:true;--theme:cpp;">
+<h3>Okay</h3>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// setup</span>
+
+    <span class="hljs-keyword">auto</span> taxi_1 = <span class="hljs-keyword">new</span> Taxi(<span class="hljs-number">7.2e-2</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">75</span>, <span class="hljs-number">0.0</span>);
+    <span class="hljs-keyword">auto</span> taxi_2 = <span class="hljs-keyword">new</span> Taxi(<span class="hljs-number">12.5e-2</span>, <span class="hljs-number">0.95</span>, <span class="hljs-number">90</span>, <span class="hljs-number">0.0</span>);
+    
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;Taxi*&gt; taxis;
+    taxis.push_back(taxi_1);
+    taxis.push_back(taxi_2);
+    
+    UI.start(taxis);
+    
+    <span class="hljs-comment">// do bookings, fill up gas</span>
+
+    <span class="hljs-comment">// Never forget to clean up...</span>
+    <span class="hljs-keyword">delete</span> taxi_1;
+    <span class="hljs-keyword">delete</span> taxi_2;
+}
+
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Manual Memory Management is tedious and error prone</li>
+<li data-marpit-fragment="2">Unnessesary copies of pointers</li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-marpit-fragments="4" data-paginate="true" data-theme="cpp" data-marpit-pagination="26" style="--paginate:true;--theme:cpp;">
+<h3>Good</h3>
+<div class="row">
+<div class="col-xs">
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// setup</span>
+
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">unique_ptr</span>&lt;Taxi&gt;&gt; taxis;
+    taxis.emplace_back(
+        <span class="hljs-built_in">std</span>::make_unique&lt;Taxi&gt;(<span class="hljs-number">7.2e-2</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">75</span>, <span class="hljs-number">0.0</span>)
+    );
+    taxis.emplace_back(
+        <span class="hljs-built_in">std</span>::make_unique&lt;Taxi&gt;(<span class="hljs-number">12.5e-2</span>, <span class="hljs-number">0.95</span>, <span class="hljs-number">90</span>, <span class="hljs-number">0.0</span>)
+    );
+    
+    UI.start(taxis);
+    <span class="hljs-comment">// do bookings, fill up gas</span>
+    
+    <span class="hljs-comment">// Everything is deleted automatically</span>
+}
+
+</code></pre>
+</div>
+<div class="col-xs">
+<ul>
+<li data-marpit-fragment="1">Noisy but comfortable</li>
+<li data-marpit-fragment="2">Memory efficent</li>
+<li data-marpit-fragment="3">Clear ownership</li>
+<li data-marpit-fragment="4">No ressource leak <img class="emoji" draggable="false" alt="💦" src="https://twemoji.maxcdn.com/2/svg/1f4a6.svg" data-marp-twemoji=""/></li>
+</ul>
+</div>
+</div>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-paginate="true" data-theme="cpp" data-marpit-pagination="27" style="--paginate:true;--theme:cpp;">
+<h2>Linters - Tooling</h2>
+<h3><code>clang-tidy</code> <em>CLion VS 2013+</em></h3>
+<p>Clang-tidy has a set of rules that specifically enforce the C++ Core Guidelines. These rules are named in the pattern <code>cppcoreguidelines-*.</code></p>
+<h3><code>CppCoreCheck</code> <em>VS 2015+</em></h3>
+<p>The Microsoft compiler’s C++ code analysis contains a set of rules specifically aimed at enforcement of the C++ Core Guidelines.</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="28" style="--paginate:true;--class:invert;--theme:cpp;">
+<h1>Bonus!</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-paginate="true" data-theme="cpp" data-marpit-pagination="29" style="--paginate:true;--theme:cpp;">
+<h2><code>clang-format</code></h2>
+<p>Automatic source code formatting following defined style rules.</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-paginate="true" data-theme="cpp" data-marpit-pagination="30" style="--paginate:true;--theme:cpp;">
+<h2>Before</h2>
+<pre><code class="language-cpp"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> Taxi::getState( ) <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span>{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">ostringstream</span> state;
+    state &lt;&lt; getName() &lt;&lt; <span class="hljs-string">" &gt;&gt; "</span>
+    &lt;&lt; <span class="hljs-built_in">std</span>::fixed &lt;&lt;
+    <span class="hljs-built_in">std</span>::setprecision(<span class="hljs-number">2</span>)
+    &lt;&lt; <span class="hljs-built_in">std</span>::setfill(<span class="hljs-string">' '</span>) &lt;&lt;
+    <span class="hljs-built_in">std</span>::setw(<span class="hljs-number">7</span>) &lt;&lt;
+    m_Mileage &lt;&lt;
+    <span class="hljs-string">" km, "</span> &lt;&lt;
+    <span class="hljs-built_in">std</span>::setw( <span class="hljs-number">7</span> ) &lt;&lt; m_GasLevel
+    &lt;&lt; <span class="hljs-string">" l, "</span> &lt;&lt; <span class="hljs-built_in">std</span>::setw(
+        <span class="hljs-number">7</span>) &lt;&lt; m_Balance
+        &lt;&lt; <span class="hljs-string">" Euro"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span>
+    state.str();}
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-paginate="true" data-theme="cpp" data-marpit-pagination="31" style="--paginate:true;--theme:cpp;">
+<h2>After</h2>
+<pre><code class="language-cpp"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> Taxi::getState() <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span>
+{
+    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">ostringstream</span> state;
+    state &lt;&lt; getName() &lt;&lt; <span class="hljs-string">" &gt;&gt; "</span> &lt;&lt; <span class="hljs-built_in">std</span>::fixed &lt;&lt; <span class="hljs-built_in">std</span>::setprecision(<span class="hljs-number">2</span>)
+          &lt;&lt; <span class="hljs-built_in">std</span>::setfill(<span class="hljs-string">' '</span>) &lt;&lt; <span class="hljs-built_in">std</span>::setw(<span class="hljs-number">7</span>) &lt;&lt; m_Mileage &lt;&lt; <span class="hljs-string">" km, "</span>
+          &lt;&lt; <span class="hljs-built_in">std</span>::setw(<span class="hljs-number">7</span>) &lt;&lt; m_GasLevel &lt;&lt; <span class="hljs-string">" l, "</span> &lt;&lt; <span class="hljs-built_in">std</span>::setw(<span class="hljs-number">7</span>) &lt;&lt; m_Balance
+          &lt;&lt; <span class="hljs-string">" Euro"</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">return</span> state.str();
+}
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-marpit-scope-IiCuRHR2="" data-paginate="true" data-theme="cpp" data-marpit-pagination="32" style="--paginate:true;--theme:cpp;">
+<p><img class="emoji" draggable="false" alt="😌" src="https://twemoji.maxcdn.com/2/svg/1f60c.svg" data-marp-twemoji=""/></p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="33" data-marpit-fragments="6" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="33" style="--paginate:true;--class:invert;--theme:cpp;">
+<h1>Conlusion</h1>
+<ul>
+<li data-marpit-fragment="1">
+<p>Writing safe, reliable and maintainable C++ is difficult</p>
+<ul>
+<li data-marpit-fragment="2">Practice</li>
+<li data-marpit-fragment="3">Care</li>
+<li data-marpit-fragment="4">Experience</li>
+</ul>
+</li>
+<li data-marpit-fragment="5">
+<p>C++ has shortcomings that cannot be fixed soon</p>
+</li>
+<li data-marpit-fragment="6">
+<h3>Guidelines and tools are there to help <img class="emoji" draggable="false" alt="☝️" src="https://twemoji.maxcdn.com/2/svg/261d.svg" data-marp-twemoji=""/></h3>
+</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="34" data-marpit-fragments="1" data-paginate="true" data-theme="cpp" data-marpit-pagination="34" style="--paginate:true;--theme:cpp;">
+<h1>Please use them</h1>
+<ul>
+<li data-marpit-fragment="1">
+<h3><code>You won't regret it</code></h3>
+</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="35" data-paginate="true" data-class="invert" data-theme="cpp" class="invert" data-marpit-pagination="35" style="--paginate:true;--class:invert;--theme:cpp;">
+<h1>Thank you for listening! <img class="emoji" draggable="false" alt="🍻" src="https://twemoji.maxcdn.com/2/svg/1f37b.svg" data-marp-twemoji=""/></h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="36" data-paginate="true" data-theme="cpp" data-marpit-pagination="36" style="--paginate:true;--theme:cpp;">
+<h1>Further Information</h1>
+<div class="row center-xs middle-xs around-xs">
+<div class="col-xs">
+<p><img src="effective_modern_cpp.jpg" alt="width:250px" style="width:250px;" /></p>
+</div>
+<div class="col-xs">
+<p><img src="cpp_guidlines_qr.svg" alt="width:300px" style="width:300px;" /></p>
+</div>
+<div class="col-xs">
+<p><img src="modern_cpp_features_qr.svg" alt="width:300px" style="width:300px;" /></p>
+</div>
+</div>
+<div class="row center-xs top-xs around-xs">
+<div class="col-xs">
+<h6>Scott Meyers: <br /> Effective Modern C++</h6>
+</div>
+<div class="col-xs">
+<h6>C++ Core Guidelines</h6>
+</div>
+<div class="col-xs">
+<h6>Modern C++ Features</h6>
+</div>
+</div></section>
+</foreignObject></svg></article><script>!function(){"use strict";function e(e){var n=r([["iOS",/iP(hone|od|ad)/],["Android OS",/Android/],["BlackBerry OS",/BlackBerry|BB10/],["Windows Mobile",/IEMobile/],["Amazon OS",/Kindle/],["Windows 3.11",/Win16/],["Windows 95",/(Windows 95)|(Win95)|(Windows_95)/],["Windows 98",/(Windows 98)|(Win98)/],["Windows 2000",/(Windows NT 5.0)|(Windows 2000)/],["Windows XP",/(Windows NT 5.1)|(Windows XP)/],["Windows Server 2003",/(Windows NT 5.2)/],["Windows Vista",/(Windows NT 6.0)/],["Windows 7",/(Windows NT 6.1)/],["Windows 8",/(Windows NT 6.2)/],["Windows 8.1",/(Windows NT 6.3)/],["Windows 10",/(Windows NT 10.0)/],["Windows ME",/Windows ME/],["Open BSD",/OpenBSD/],["Sun OS",/SunOS/],["Linux",/(Linux)|(X11)/],["Mac OS",/(Mac_PowerPC)|(Macintosh)/],["QNX",/QNX/],["BeOS",/BeOS/],["OS/2",/OS\/2/],["Search Bot",/(nuhk)|(Googlebot)|(Yammybot)|(Openbot)|(Slurp)|(MSNBot)|(Ask Jeeves\/Teoma)|(ia_archiver)/]]).filter(function(n){return n.rule&&n.rule.test(e)})[0];return n?n.name:null}function n(){return"undefined"!=typeof process&&process.version&&{name:"node",version:process.version.slice(1),os:process.platform}}function t(n){var t=r([["aol",/AOLShield\/([0-9\._]+)/],["edge",/Edge\/([0-9\._]+)/],["yandexbrowser",/YaBrowser\/([0-9\._]+)/],["vivaldi",/Vivaldi\/([0-9\.]+)/],["kakaotalk",/KAKAOTALK\s([0-9\.]+)/],["samsung",/SamsungBrowser\/([0-9\.]+)/],["chrome",/(?!Chrom.*OPR)Chrom(?:e|ium)\/([0-9\.]+)(:?\s|$)/],["phantomjs",/PhantomJS\/([0-9\.]+)(:?\s|$)/],["crios",/CriOS\/([0-9\.]+)(:?\s|$)/],["firefox",/Firefox\/([0-9\.]+)(?:\s|$)/],["fxios",/FxiOS\/([0-9\.]+)/],["opera",/Opera\/([0-9\.]+)(?:\s|$)/],["opera",/OPR\/([0-9\.]+)(:?\s|$)$/],["ie",/Trident\/7\.0.*rv\:([0-9\.]+).*\).*Gecko$/],["ie",/MSIE\s([0-9\.]+);.*Trident\/[4-7].0/],["ie",/MSIE\s(7\.0)/],["bb10",/BB10;\sTouch.*Version\/([0-9\.]+)/],["android",/Android\s([0-9\.]+)/],["ios",/Version\/([0-9\._]+).*Mobile.*Safari.*/],["safari",/Version\/([0-9\._]+).*Safari/],["facebook",/FBAV\/([0-9\.]+)/],["instagram",/Instagram\s([0-9\.]+)/],["ios-webview",/AppleWebKit\/([0-9\.]+).*Mobile/]]);if(!n)return null;var i=t.map(function(e){var t=e.rule.exec(n),r=t&&t[1].split(/[._]/).slice(0,3);return r&&r.length<3&&(r=r.concat(1==r.length?[0,0]:[0])),t&&{name:e.name,version:r.join(".")}}).filter(Boolean)[0]||null;return i&&(i.os=e(n)),/alexa|bot|crawl(er|ing)|facebookexternalhit|feedburner|google web preview|nagios|postrank|pingdom|slurp|spider|yahoo!|yandex/i.test(n)&&((i=i||{}).bot=!0),i}function r(e){return e.map(function(e){return{name:e[0],rule:e[1]}})}var i=function(){return"undefined"!=typeof navigator?t(navigator.userAgent):n()},o=i;let s;const a=["android","bb10","crios","facebook","fxios","instagram","ios-webview","ios","phantomjs","safari"];function l(){Array.from(document.getElementsByTagName("svg"),e=>{if(e.hasAttribute("data-marpit-svg")){const{clientHeight:n,clientWidth:t}=e;e.style.transform||(e.style.transform="translateZ(0)");const{width:r,height:i}=e.viewBox.baseVal,o=Math.min(n/i,t/r);Array.from(e.querySelectorAll(":scope > foreignObject"),e=>{const s=e.x.baseVal.value,a=e.y.baseVal.value;Array.from(e.querySelectorAll(":scope > section"),e=>{e.style.transformOrigin||(e.style.transformOrigin="0 0");const l=(t-o*r)/2-s,c=(n-o*i)/2-a;e.style.transform=`translate3d(${l}px,${c}px,0) scale(${o}) translate(${s}px,${a}px)`})})}})}var c,p,d=(function(e,n){Object.defineProperty(n,"__esModule",{value:!0}),n.default=void 0;var t=function(e){return(n,...t)=>{if(n.marpit)return e.call(this,n,...t);throw new Error("Marpit's markdown-it plugin requires `marpit` member.")}};n.default=t}(c={exports:{}},c.exports),c.exports),u=(p=d)&&p.__esModule&&Object.prototype.hasOwnProperty.call(p,"default")?p.default:p;const f="data-marp-fitting",m="data-marp-fitting-code",g="data-marp-fitting-math",h="data-marp-fitting-svg-content",w="data-marp-fitting-svg-content-wrap",v=/^(<pre[^>]*?><code[^>]*?>)([\s\S]*)(<\/code><\/pre>\n*)$/,b=(e,n)=>{const t=function(e,n){const{lastGlobalDirectives:t}=e,r=t?t.theme:void 0;return e.themeSet.getThemeProp(r,`meta.${n}`)}(e,"auto-scaling")||"";return!!("true"===t||n&&t.includes(n))};function S(e){const{code_block:n,fence:t}=e.renderer.rules,r=n=>(...t)=>{const r=n(...t);return b(e.marpit,"code")?r.replace(v,(n,t,r,i)=>e.marpit.options.inlineSVG?[`${t}<svg ${f}="svg" ${m}><foreignObject>`,`<span ${h}><span ${w}>`,r,`</span></span></foreignObject></svg>${i}`].join(""):`${t}<span ${f}="plain">${r}</span>${i}`):r};e.renderer.rules.code_block=r(n),e.renderer.rules.fence=r(t)}function $(e){e.core.ruler.after("inline","marp_fitting_header",e=>{let n=void 0;for(const t of e.tokens)if(n||"heading_open"!==t.type||(n=t),n)if("inline"===t.type){let n=!1;for(const e of t.children)"marpit_comment"===e.type&&"fit"===e.content&&(n=!0,e.meta=e.meta||{},e.meta.marpitCommentParsed="marp-fitting-header");if(n){const n=new e.Token("marp_fitting_open","span",1);n.attrSet(f,"plain"),t.children=[n,...t.children,new e.Token("marp_fitting_close","span",-1)]}}else"heading_close"===t.type&&(n=void 0)}),e.renderer.rules.marp_fitting_open=(()=>b(e.marpit,"fittingHeader")?e.marpit.options.inlineSVG?`<svg ${f}="svg"><foreignObject><span ${h}>`:`<span ${f}="plain">`:""),e.renderer.rules.marp_fitting_close=(()=>b(e.marpit,"fittingHeader")?`</span>${e.marpit.options.inlineSVG?"</foreignObject></svg>":""}`:"")}function _(e){const{marp_math_block:n}=e.renderer.rules;n&&(e.renderer.rules.marp_math_block=((...t)=>{const r=n(...t);if(b(e.marpit,"math")){const n=r.slice(3,-4);return e.marpit.options.inlineSVG?[`<p><svg ${f}="svg" ${g}><foreignObject>`,`<span ${h}><span ${w}>`,n,"</span></span></foreignObject></svg></p>"].join(""):`<p><span ${f}="plain">${n}</span></p>`}return r}))}u(e=>{e.use($).use(S).use(_)});const W=(e,n,t)=>{if(e.getAttribute(n)!==t)return e.setAttribute(n,t),!0};!function(e=!0){const n=()=>{for(const e of function(){if(!s){s=[];const{name:e}=o()||{};a.includes(e)&&s.push(l)}return s}())e();Array.from(document.querySelectorAll(`svg[${f}="svg"]`),e=>{const n=e.firstChild,t=n.firstChild,{scrollWidth:r,scrollHeight:i}=t;let o,s=1;if(e.hasAttribute(m)&&(o=e.parentElement.parentElement),e.hasAttribute(g)&&(o=e.parentElement),o){const e=getComputedStyle(o),n=Math.ceil(o.clientWidth-parseFloat(e.paddingLeft)-parseFloat(e.paddingRight));n&&(s=n)}const a=Math.max(r,s),l=Math.max(i,1),c=`0 0 ${a} ${l}`;W(n,"width",`${a}`),W(n,"height",`${l}`),W(e,"preserveAspectRatio",getComputedStyle(e).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),W(e,"viewBox",c)&&e.classList.toggle("__reflow__")}),e&&window.requestAnimationFrame(n)};n()}()}();
+</script><script>!function(){"use strict";var e={from:function(e,t){var n=1===(e.parent||e).nodeType?e.parent||e:document.querySelector(e.parent||e),r=[].filter.call("string"==typeof e.slides?n.querySelectorAll(e.slides):e.slides||n.children,function(e){return"SCRIPT"!==e.nodeName}),i=r[0],l={},s=function(e,t){r[e]&&(c("deactivate",u(i,t)),i=r[e],c("activate",u(i,t)))},o=function(e,t){var n=r.indexOf(i)+e;c(e>0?"next":"prev",u(i,t))&&s(n,t)},a=function(e,t){l[e]=(l[e]||[]).filter(function(e){return e!==t})},c=function(e,t){return(l[e]||[]).reduce(function(e,n){return e&&!1!==n(t)},!0)},u=function(e,t){return(t=t||{}).index=r.indexOf(e),t.slide=e,t},d={on:function(e,t){return(l[e]||(l[e]=[])).push(t),a.bind(null,e,t)},off:a,fire:c,slide:function(e,t){if(!arguments.length)return r.indexOf(i);c("slide",u(r[e],t))&&s(e,t)},next:o.bind(null,1),prev:o.bind(null,-1),parent:n,slides:r};return(t||[]).forEach(function(e){e(d)}),s(0),d}},t=function(){return function(e){e.slides.forEach(function(e){e.addEventListener("keydown",function(e){(/INPUT|TEXTAREA|SELECT/.test(e.target.nodeName)||"true"===e.target.contentEditable)&&e.stopPropagation()})})}};function n(e){e.parent.classList.add("bespoke-marp-parent"),e.slides.map(e=>e.classList.add("bespoke-marp-slide")),e.on("activate",t=>{e.slides.map(e=>e.classList.remove("bespoke-marp-active")),t.slide.classList.add("bespoke-marp-active")})}function r(e=2e3){return t=>{let n;function r(){n&&clearTimeout(n),n=setTimeout(()=>{t.parent.classList.add("bespoke-marp-inactive")},e),t.parent.classList.remove("bespoke-marp-inactive")}document.addEventListener("mousedown",r),document.addEventListener("mousemove",r),document.addEventListener("touchend",r),setTimeout(r,0)}}function i(e){let t=0,n=0;const r=e.slides.map(e=>[null,...e.querySelectorAll("[data-marpit-fragment]")]),i=e=>void 0!==r[t][n+e],l=(i,l)=>{t=i,n=l,r.forEach((e,t)=>{e.forEach((e,n)=>{if(null==e)return;const r=t<i||t===i&&n<=l;e.setAttribute("data-bespoke-marp-fragment",r?"active":"inactive"),t===i&&n===l?e.setAttribute("data-bespoke-marp-current-fragment","current"):e.removeAttribute("data-bespoke-marp-current-fragment")})}),e.fire("fragment",{slide:e.slides[i],index:i,fragments:r[i],fragmentIndex:l})};e.on("next",()=>{if(i(1))return l(t,n+1),!1;const e=t+1;r[e]&&l(e,0)}),e.on("prev",()=>{if(i(-1))return l(t,n-1),!1;const e=t-1;r[e]&&l(e,r[e].length-1)}),e.on("slide",({index:e,fragment:t})=>{let n=0;if(void 0!==t){const i=r[e];if(i){const{length:e}=i;n=-1===t?e-1:Math.min(Math.max(t,0),e-1)}}l(e,n)}),l(0,0)}var l,s,o=(function(e){var t,n,r,i,l,s;t="undefined"!=typeof window&&void 0!==window.document?window.document:{},n=e.exports,r="undefined"!=typeof Element&&"ALLOW_KEYBOARD_INPUT"in Element,i=function(){for(var e,n=[["requestFullscreen","exitFullscreen","fullscreenElement","fullscreenEnabled","fullscreenchange","fullscreenerror"],["webkitRequestFullscreen","webkitExitFullscreen","webkitFullscreenElement","webkitFullscreenEnabled","webkitfullscreenchange","webkitfullscreenerror"],["webkitRequestFullScreen","webkitCancelFullScreen","webkitCurrentFullScreenElement","webkitCancelFullScreen","webkitfullscreenchange","webkitfullscreenerror"],["mozRequestFullScreen","mozCancelFullScreen","mozFullScreenElement","mozFullScreenEnabled","mozfullscreenchange","mozfullscreenerror"],["msRequestFullscreen","msExitFullscreen","msFullscreenElement","msFullscreenEnabled","MSFullscreenChange","MSFullscreenError"]],r=0,i=n.length,l={};r<i;r++)if((e=n[r])&&e[1]in t){for(r=0;r<e.length;r++)l[n[0][r]]=e[r];return l}return!1}(),l={change:i.fullscreenchange,error:i.fullscreenerror},s={request:function(e){return new Promise(function(n){var l=i.requestFullscreen,s=function(){this.off("change",s),n()}.bind(this);e=e||t.documentElement,/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)?e[l]():e[l](r?Element.ALLOW_KEYBOARD_INPUT:{}),this.on("change",s)}.bind(this))},exit:function(){return new Promise(function(e){if(this.isFullscreen){var n=function(){this.off("change",n),e()}.bind(this);t[i.exitFullscreen](),this.on("change",n)}else e()}.bind(this))},toggle:function(e){return this.isFullscreen?this.exit():this.request(e)},onchange:function(e){this.on("change",e)},onerror:function(e){this.on("error",e)},on:function(e,n){var r=l[e];r&&t.addEventListener(r,n,!1)},off:function(e,n){var r=l[e];r&&t.removeEventListener(r,n,!1)},raw:i},i?(Object.defineProperties(s,{isFullscreen:{get:function(){return Boolean(t[i.fullscreenElement])}},element:{enumerable:!0,get:function(){return t[i.fullscreenElement]}},enabled:{enumerable:!0,get:function(){return Boolean(t[i.fullscreenEnabled])}}}),n?(e.exports=s,e.exports.default=s):window.screenfull=s):n?e.exports=!1:window.screenfull=!1}(l={exports:{}},l.exports),l.exports);function a(e){e.fullscreen=(()=>o&&o.toggle(document.body)),document.addEventListener("keydown",t=>{70!==t.which&&122!==t.which||t.altKey||t.ctrlKey||t.metaKey||!o||!o.enabled||(e.fullscreen(),t.preventDefault())})}function c(e={}){const t=Object.assign({history:!0},e);return e=>{function n(){const t=parseInt(window.location.hash.slice(1),10);Number.isNaN(t)||function(t){const n=Math.max(0,Math.min(t,e.slides.length-1));n!==e.slide()&&e.slide(n)}(t-1)}setTimeout(()=>{n(),e.on("activate",e=>{t.history?window.location.hash=e.index+1:window.location.replace(`#${e.index+1}`)}),window.addEventListener("hashchange",n)},0)}}function u(e={}){const t=Object.assign({interval:200},e);return e=>{document.addEventListener("keydown",t=>{(32===t.which&&t.shiftKey||33===t.which||37===t.which||38===t.which)&&e.prev(),(32===t.which&&!t.shiftKey||34===t.which||39===t.which||40===t.which)&&e.next(),35===t.which&&e.slide(e.slides.length-1,{fragment:-1}),36===t.which&&e.slide(0)});let n,r,i=0;e.parent.addEventListener("wheel",l=>{let o=!1;const a=(e,t)=>{e&&(o=o||function(e,t){return function(e,t){const n=t===s.X?"Width":"Height";return e[`client${n}`]<e[`scroll${n}`]}(e,t)&&function(e,t){const{overflow:n}=e,r=e[`overflow${t}`];return"auto"===n||"scroll"===n||"auto"===r||"scroll"===r}(getComputedStyle(e),t)}(e,t)),e&&e.parentElement&&a(e.parentElement,t)};if(0!==l.deltaX&&a(l.target,s.X),0!==l.deltaY&&a(l.target,s.Y),o)return;l.preventDefault(),r&&clearTimeout(r),r=setTimeout(()=>{n=0},t.interval);const c=Date.now()-i<t.interval,u=Math.sqrt(Math.pow(l.deltaX,2)+Math.pow(l.deltaY,2)),d=u<=n;if(n=u,c||d)return;let f;(l.deltaX>0||l.deltaY>0)&&(f="next"),(l.deltaX<0||l.deltaY<0)&&(f="prev"),f&&(e[f](),i=Date.now())})}}function d(e=".bespoke-marp-osc"){const t=document.querySelector(e);if(!t)return()=>{};const n=(e,n)=>{t.querySelectorAll(`[data-bespoke-marp-osc=${JSON.stringify(e)}]`).forEach(n)};return o&&!o.enabled&&n("fullscreen",e=>e.style.display="none"),e=>{t.addEventListener("click",t=>{if(t.target instanceof HTMLElement)switch(t.target.dataset.bespokeMarpOsc){case"next":e.next();break;case"prev":e.prev();break;case"fullscreen":"function"==typeof e.fullscreen&&o&&o.enabled&&e.fullscreen()}}),e.parent.appendChild(t),e.on("activate",({index:t})=>{n("page",n=>n.textContent=`Page ${t+1} of ${e.slides.length}`)}),e.on("fragment",({index:t,fragments:r,fragmentIndex:i})=>{n("prev",e=>e.disabled=0===t&&0===i),n("next",n=>n.disabled=t===e.slides.length-1&&i===r.length-1)}),o&&o.onchange(()=>n("fullscreen",e=>e.classList.toggle("exit",o&&o.isFullscreen)))}}!function(e){e.X="X",e.Y="Y"}(s||(s={}));const f=".bespoke-progress-bar";function h(e){e.on("activate",t=>{document.querySelectorAll(f).forEach(n=>{n.style.flexBasis=`${100*t.index/(e.slides.length-1)}%`})})}function m(e={}){const t=Object.assign({slope:Math.tan(-35*Math.PI/180),swipeThreshold:30},e);return e=>{let n;const r=e.parent,i=e=>{const t=r.getBoundingClientRect();return{x:e.pageX-(t.left+t.right)/2,y:e.pageY-(t.top+t.bottom)/2}};r.addEventListener("touchstart",e=>{n=1===e.touches.length?i(e.touches[0]):void 0}),r.addEventListener("touchmove",e=>{if(n)if(1===e.touches.length){e.preventDefault();const t=i(e.touches[0]),r=t.x-n.x,l=t.y-n.y;n.delta=Math.sqrt(Math.pow(Math.abs(r),2)+Math.pow(Math.abs(l),2)),n.radian=Math.atan2(r,l)}else n=void 0}),r.addEventListener("touchend",r=>{if(n){if(n.delta&&n.delta>=t.swipeThreshold){let i=n.radian-t.slope;i=(i+Math.PI)%(2*Math.PI)-Math.PI,e[i<0?"next":"prev"](),r.stopPropagation()}n=void 0}})}}e.from(document.getElementById("presentation"),[t(),n,r(),c({history:!1}),u(),a,h,m(),d(),i])}();
+</script></body></html>

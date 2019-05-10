@@ -1,11 +1,11 @@
 ---
 marp: true
 title: C++ Core Guidelines
-inlineSVG: false
+theme: cpp
+inlineSVG: true
 bespoke-progress: true
 paginate: true
 _paginate: false
-html: true
 ---
 
 <!-- _class: lead -->

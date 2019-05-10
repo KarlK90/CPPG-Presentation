@@ -1,7 +1,7 @@
 /*!
- * Marp / Marpit Uncover theme
+ * CPP Theme forked from uncover
  *
- * @theme uncover
+ * @theme cpp
  * @author Yuki Hattori
  *
  * @auto-scaling fittingHeader,math
@@ -270,7 +270,7 @@ section {
 
     &::before,
     &::after {
-      content: url('./assets/uncover-quote.svg');
+      content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48c3R5bGU+LmF7ZmlsbDojODg4O29wYWNpdHk6LjMzfTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNNDQgMTkuM0wzOC45NCAwQzguMTQgOS41OSAwIDQwLjA1IDAgNTQuODNWMTAwaDQxLjQ3VjU0LjgzaC0yM2MtLjA0LS4yOC4yNS0yNy42NiAyNS41My0zNS41M3pNMTAwIDE5LjNMOTQuOTQgMEM2NC4xNCA5LjU5IDU2IDQwLjA1IDU2IDU0LjgzVjEwMGg0MS40N1Y1NC44M2gtMjNjLS4wNC0uMjguMjUtMjcuNjYgMjUuNTMtMzUuNTN6Ii8+PC9zdmc+);
       height: auto;
       pointer-events: none;
       position: absolute;
