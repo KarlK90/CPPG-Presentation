@@ -46,15 +46,20 @@ Bjarne Stroustrup
 
 ## Agenda
 
-Common Sources of Errors and Maintainability Pitfalls
+Errors and Maintainability Pitfalls
 Reasoning about a solution
-History of C++ Versions
-The Goals of the C++ Core Guidelines
-Short Overview of the Categories
+History of C++ Standards
+
+—
+
+Goals and Overview of C++ Core Guidelines
 **Applied Examples**
+
+—
+
 Tools
 Conclusion
-Q & A
+Q&A
 
 ---
 
@@ -97,7 +102,7 @@ section { text-align: left; }
 
 ---
 
-## C++ History and Standards
+## C++ Standards
 
 | Year | C++ Standard | Informal name |
 | - | - | - |
