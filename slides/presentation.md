@@ -35,7 +35,7 @@ Bjarne Stroustrup
 </div>
 <div class="col-xs">
 
-* > In C++ it's harder to shoot yourself in the foot, but when you do, you blow off your whole leg.
+* > C makes it easy to shoot yourself in the foot; C++ makes it harder, but when you do it blows your whole leg off.
 
 </div>
 </div>
@@ -44,7 +44,7 @@ Bjarne Stroustrup
 
 <!-- _class: invert -->
 
-## Table of contents
+## Agenda
 
 Common Sources of Errors and Maintainability Pitfalls
 Reasoning about a solution
@@ -237,9 +237,6 @@ li { text-align: center; }
 
 # Showtime 🥳
 
-* ### Con: Constants and immutability
-* ### R: Resource management
-
 ---
 
 # Con: Constants and immutability
@@ -368,8 +365,10 @@ void func()
         // do things with line
     }
 
-    // {...} more code - maybe with early returns
-    // exceptions, threads...
+    {
+        more code - maybe with early returns
+        exceptions, threads...
+    }
 
     if(d_fp != nullptr){
         fclose(d_fp);
@@ -444,8 +443,10 @@ void func() {
         // do things with line
     }
 
-    // {...} more code - maybe with early returns
-    // exceptions, threads...
+    {
+        more code - maybe with early returns
+        exceptions, threads...
+    }
 
     // note, no fclose
     }
@@ -456,7 +457,7 @@ void func() {
 
 * :thumbsup: The FILE pointer will never leak due to destruction. 
 * :thumbsup: Closing is deterministic and in a single place
-* 💥 Vurnerable to "use after free" errors
+* 💥 Vurnerable to "use after free" errors due to possible copy
 
 </div>
 </div>
@@ -497,8 +498,10 @@ void func() {
         // do things with line
     }
 
-    // {...} more code - maybe with early returns
-    // exceptions, threads...
+    {
+        more code - maybe with early returns
+        exceptions, threads...
+    }
 
     // note, no fclose
     }
@@ -541,8 +544,10 @@ void func() {
         // do things with line
     }
 
-    // {...} more code - maybe with early returns
-    // exceptions, threads...
+    {
+        more code - maybe with early returns
+        exceptions, threads...
+    }
 
     // note, no fclose
     }
