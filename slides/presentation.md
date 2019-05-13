@@ -337,9 +337,21 @@ R.20 Use `unique_ptr` or `shared_ptr` to represent ownership
 
 R.11 Avoid calling `new` and `delete` explicitly
 
-<!-- This section contains rules related to resources. A resource is anything that must be acquired and (explicitly or implicitly) released, such as memory, file handles, sockets, and locks. The reason it must be released is typically that it can be in short supply, so even delayed release may do harm. The fundamental aim is to ensure that we don’t leak any resources and that we don’t hold a resource longer than we need to. An entity that is responsible for releasing a resource is called an owner.
+---
 
-There are a few cases where leaks can be acceptable or even optimal: If you are writing a program that simply produces an output based on an input and the amount of memory needed is proportional to the size of the input, the optimal strategy (for performance and ease of programming) is sometimes simply never to delete anything. If you have enough memory to handle your largest input, leak away, but be sure to give a good error message if you are wrong. Here, we ignore such cases. -->
+# Resource
+
+* Anything that must be acquired and released such as
+    + Memory
+    + File handles
+    + Database connections
+    + Locks
+    + Sockets
+* You don't hold it longer than needed
+
+# Owner
+
+* An entity that is responsible for the release of the resource
 
 ---
 
