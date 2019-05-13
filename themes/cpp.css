@@ -50,7 +50,7 @@ section code {
   color: #202228;
 }
 section a {
-  color: #009dd5;
+  color: #202228;
 }
 section a:hover {
   color: #087eaa;
@@ -183,7 +183,7 @@ section.invert code {
   color: #fff;
 }
 section.invert a {
-  color: #60d0f0;
+  color: #fff;
 }
 section.invert a:hover {
   color: #88dcf4;

@@ -47,8 +47,8 @@ Bjarne Stroustrup
 ## Agenda
 
 Errors and Maintainability Pitfalls
-Reasoning about a solution
 History of C++ Standards
+Reasoning about a solution
 
 —
 
@@ -778,12 +778,21 @@ std::string Taxi::getState() const noexcept
 </div>
 <div class="row center-xs top-xs around-xs">
 <div class="col-xs">
-<h6>Scott Meyers: <br> Effective Modern C++</h6>
+<h6>
+
+[Scott Meyers: <br> Effective Modern C++](http://shop.oreilly.com/product/0636920033707.do)
+</h6>
 </div>
 <div class="col-xs">
-<h6>C++ Core Guidelines</h6>
+<h6>
+
+[C++ Core Guidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
+</h6>
 </div>
 <div class="col-xs">
-<h6>Modern C++ Features</h6>
+<h6>
+
+[Modern C++ Features](https://github.com/AnthonyCalandra/modern-cpp-features)
+</h6>
 </div>
 </div>
